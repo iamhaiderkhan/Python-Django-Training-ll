@@ -1,0 +1,4 @@
+app/local_settings.py
+.idea
+venv/
+*.pyc

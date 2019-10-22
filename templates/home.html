@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<ul class="nav navbar navbar-expand-lg navbar-light bg-light">
+
+    {% if user.is_authenticated %}
+    <li class="nav-item">
+        <a class="nav-link active" href="{% url 'logout' %}">Logout</a>
+    </li>
+
+
+    {% else %}
+    {% if request.path != '/auth/login/' %}
+    <li class="nav-item">
+        <a class="nav-link active" href="{% url 'login' %}">Login</a>
+    </li>
+    {% endif %}
+      {% if request.path != '/signup/' %}
+    <li class="nav-item">
+        <a class="nav-link active" href="{% url 'signup' %}">Signup</a>
+    </li>
+    {% endif %}
+    {% endif %}
+
+</ul>
+{% if user.is_authenticated %}
+<div class="container text-center">
+    <h1 class="mt-5">Hi {{user.username}}!</h1>
+    <h1>Users</h1>
+<ul>
+{% for user in object_list %}
+    <li>{{ user.user.username}}</li>
+     <li>{{ user.address}}</li>
+{% empty %}
+    <li>No Users yet.</li>
+{% endfor %}
+</ul>
+</div>
+{% endif %}
+{% endblock content %}
+
+
+
