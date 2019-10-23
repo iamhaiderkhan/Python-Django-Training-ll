@@ -28,7 +28,7 @@ class SignUpForm(EmailDuplicationMixin, forms.ModelForm):
     def save(self):
         user = super(SignUpForm, self).save(commit=False)
         user.password = make_password(self.cleaned_data.get('password'))
-        user.user_profile = {i:self.cleaned_data[i] for i in self.cleaned_data if i not in SignUpForm.Meta.fields}
+        user.user_profile = {i: self.cleaned_data[i] for i in self.cleaned_data if i not in SignUpForm.Meta.fields}
         user.save()
         return user
 
