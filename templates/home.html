@@ -9,6 +9,9 @@
     <li class="nav-item">
         <a class="nav-link active" href="{% url 'logout' %}">Logout</a>
     </li>
+     <li class="nav-item">
+        <a class="nav-link active" href="{% url 'profile' pk=user.id %}">Profile</a>
+    </li>
 
 
     {% else %}
@@ -30,9 +33,9 @@
     <h1 class="mt-5">Hi {{user.username}}!</h1>
     <h1>Users</h1>
 <ul>
-{% for user in object_list %}
-    <li>{{ user.user.username}}</li>
-     <li>{{ user.address}}</li>
+{% for obj in object_list %}
+    <li>{{ obj.user.username}}</li>
+     <li>{{ obj.address}}</li>
 {% empty %}
     <li>No Users yet.</li>
 {% endfor %}
