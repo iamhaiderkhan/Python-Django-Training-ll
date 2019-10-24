@@ -1,5 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.core.mail import send_mail
+from smtplib import SMTPException
+from app.settings import EMAIL_HOST_USER
 # Create your models here.
 
 
@@ -14,5 +19,23 @@ class UserProfile(models.Model):
     country = models.CharField(max_length=30, blank=True, verbose_name="Your Nationality (Country)")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
+@receiver(post_save, sender=User)
+def send_email_to_new_user(sender, instance, created, **kwargs):
+    if created:
+        try:
+            send_mail(
+                'New Account',
+                'Welcome to Python training Application.',
+                EMAIL_HOST_USER,
+                [instance.email],
+                fail_silently=False
+            )
+        except SMTPException:
+            pass
+
+        print("Email Successfully Sent to:", instance.email)
+
 
 
