@@ -3,7 +3,6 @@ from django.views.generic import FormView, ListView, CreateView , UpdateView
 from .forms import UserForm, UserProfileForm, UserUpdateForm
 from .models import User, UserProfile
 from django.http import HttpResponseRedirect
-from django.core import serializers
 
 class SignUpView(CreateView):
     template_name = "registration/signup.html"
