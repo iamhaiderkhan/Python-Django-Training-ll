@@ -10,12 +10,6 @@ class UserProfileManager(Manager):
 
 class SettingsManager(Manager):
 
-    def  get_site_id(self, site_domain):
-        current_domain = Site.objects.get_by_natural_key(site_domain)
-        return current_domain.id
-
-    def get_current_settings(self, current_site_id):
-        return self.get(site_id=current_site_id)
-
-
-
+    def get_settings_by_site(self, request):
+        current_site = Site.objects.get_by_natural_key(request.get_host())
+        return self.get(site_id=current_site.id)

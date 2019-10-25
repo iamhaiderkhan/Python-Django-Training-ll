@@ -7,7 +7,7 @@ from smtplib import SMTPException
 from django.conf import settings
 from django.contrib.sites.models import Site
 from django.core.validators import RegexValidator
-
+import logging
 # Create your models here.
 
 # Import managers
@@ -42,11 +42,11 @@ def send_email_to_new_user(sender, instance, created, **kwargs):
             )
         except SMTPException:
             pass
-        print(settings.EMAIL_HOST_USER)
-        print("Email Successfully Sent to:", instance.email)
+        logging.info(settings.EMAIL_HOST_USER)
+        logging.info("Email Successfully Sent to:", instance.email)
 
 
-class Settings(models.Model):
+class SitesSettings(models.Model):
     email_host = models.CharField(max_length=255, default='')
     email_host_user = models.CharField(max_length=255)
     email_host_password = models.CharField(max_length=500)
