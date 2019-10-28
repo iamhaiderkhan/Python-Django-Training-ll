@@ -14,7 +14,7 @@
     + `source venv/bin/activate`
  + Install required packages
     + `pip install -r requirements.txt`
- + create `app/local_settings.py` with your local database settings.
+ + create `app/local_settings.py` with your local database & email settings.
  
 ```
 DATABASES = {
@@ -27,6 +27,11 @@ DATABASES = {
         'PORT': '3306',
     }
 }
+
+EMAIL_HOST = 'mail.example.com'
+EMAIL_HOST_USER = 'username'
+EMAIL_HOST_PASSWORD = 'password'
+EMAIL_PORT = 'PORT_NUMBER'
 ```
 
 + Run Django Server
